@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Ousmane Koné | Réseau & Télécom</title>
+    
+    <!-- Meta Tags Pro -->
+    <meta property="og:title" content="Portfolio Pro - Ousmane Koné | Réseau, Systèmes & Cybersécurité" />
+    <meta property="og:description" content="Découvrez le profil, les compétences et les projets d'Ousmane Koné, étudiant passionné par l'Administration Informatique et la Cybersécurité." />
+    <!-- Opengraphe -->
+    <meta property="og:image" content="https://i.postimg.cc/VkP8MGWF/portfolio.jpg" /> 
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="./favi/favicon.ico" type="image/x-icon">
+
+    <style>
+        /* === CONFIGURATION GLOBALE & VARIABLES CSS === */
+        :root {
+            /* Couleurs dominantes: Bleu Professionnel pour l'IT */
+            --accent: #007bff; /* Bleu Primaire */
+            --accent-light: #6caffa; 
+            --accent-dark: #0056b3;
+            /* Dark Mode */
+            --bg-dark: #0f172a; 
+            --surface-dark: #1e293b; 
+            --text-primary-dark: #f1f5f9; 
+            --text-secondary-dark: #94a3b8;
+            /* Light Mode */
+            --bg-light: #f8fafc; 
+            --surface-light: #ffffff; 
+            --text-primary-light: #1e293b; 
+            --text-secondary-light: #475569;
+            /* Current Mode */
+            --bg: var(--bg-dark); 
+            --surface: var(--surface-dark); 
+            --text-primary: var(--text-primary-dark); 
+            --text-secondary: var(--text-secondary-dark);
+            --font-main: 'Poppins', sans-serif;
+            --header-height: 4.5rem; 
+        }
+
+        /* === RESET & STYLES DE BASE === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; } 
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg);
+            color: var(--text-secondary);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+        }
+        body.light-mode {
+            --bg: var(--bg-light); --surface: var(--surface-light);
+            --text-primary: var(--text-primary-light); --text-secondary: var(--text-secondary-light);
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        section { padding: 6rem 0; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--text-primary); margin-bottom: 3.5rem; font-weight: 700; opacity: 1; transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .section-title span { color: var(--accent); }
+        h3 { color: var(--text-primary); }
+        strong { font-weight: 700; color: var(--text-primary); } /* Pour forcer le gras visible */
+
+        /* === HEADER & NAVIGATION === */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            height: var(--header-height);
+            z-index: 1000;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        header.scrolled { background-color: var(--surface); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .header-container { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+        .logo { font-size: 1.6rem; font-weight: 700; color: var(--text-primary); }
+        .logo span { color: var(--accent); }
+        
+        nav ul { display: flex; list-style: none; gap: 1.5rem; transition: all 0.3s ease; }
+        nav a { 
+            color: var(--text-secondary); text-decoration: none; font-weight: 500; 
+            transition: color 0.3s, border-bottom 0.3s;
+            padding-bottom: 0.3rem; 
+        }
+        nav a:hover, nav a.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+        
+        .nav-actions { display: flex; align-items: center; gap: 1rem; }
+        .btn-portfolio {
+            font-size: 0.9rem; padding: 0.5rem 1rem; background: transparent;
+            border: 2px solid var(--accent); color: var(--accent); border-radius: 50px;
+            text-decoration: none; font-weight: 600; transition: all 0.3s ease;
+            display: inline-flex; align-items: center;
+        }
+        .btn-portfolio:hover { background-color: var(--accent); color: var(--surface-light); transform: translateY(-2px); }
+        
+        #theme-switcher, .menu-toggle, #quick-actions-toggle { 
+            background: none; border: none; cursor: pointer; color: var(--text-secondary); 
+            font-size: 1.3rem; transition: color 0.3s; padding: 0.5rem;
+        }
+        #theme-switcher:hover, .menu-toggle:hover, #quick-actions-toggle:hover { color: var(--accent); }
+        .menu-toggle { display: none; }
+        #quick-actions-toggle { display: none; }
+
+        /* Quick Actions Menu (Mobile only) */
+        #quick-actions-menu {
+            position: absolute;
+            top: var(--header-height);
+            right: 0;
+            background-color: var(--surface);
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 0.5rem 1rem;
+            z-index: 999;
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 150px;
+        }
+        #quick-actions-menu a {
+            font-size: 1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.5rem;
+            display: block;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        #quick-actions-menu a:hover {
+            background-color: var(--bg);
+            color: var(--accent);
+        }
+
+        /* === SECTION HERO === */
+        .hero { min-height: calc(100vh - var(--header-height)); display: flex; align-items: center; padding-top: var(--header-height); }
+        .hero .container { 
+            display: flex; align-items: center; justify-content: space-between; gap: 4rem; 
+        }
+        .hero-content { flex-basis: 55%; }
+        .hero-content h1 { font-size: 3.2rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .hero-content h1 span { display: block; font-size: 1.1rem; color: var(--text-secondary); font-weight: 400; text-transform: uppercase; letter-spacing: 2px; }
+        .hero-content h2 { font-size: 1.8rem; color: var(--accent); margin-bottom: 1.5rem; font-weight: 600; }
+        .hero-content p { margin-bottom: 2rem; max-width: 600px; line-height: 1.7; }
+        .hero-buttons { display: flex; gap: 1rem; }
+        .btn-base { 
+            padding: 0.8rem 2rem; border-radius: 50px; text-decoration: none; 
+            font-weight: 600; transition: all 0.3s ease; font-size: 1rem;
+        }
+        .btn-primary { background: var(--accent); color: white; border: 2px solid var(--accent); }
+        .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4); }
+        .btn-secondary { background: var(--surface); color: var(--text-primary); border: 2px solid var(--text-secondary); }
+        .btn-secondary:hover { background: var(--surface); color: var(--accent); border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+        .hero-image {
+            flex-basis: 40%;
+            text-align: center;
+        }
+        .hero-image img {
+            width: 100%;
+            max-width: 350px;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2); 
+            border: 5px solid var(--surface);
+            transition: transform 0.5s ease;
+        }
+        .hero-image:hover img {
+            transform: scale(1.03) rotate(-1deg);
+        }
+
+        /* === SECTION A PROPOS === */
+        #about { background-color: var(--surface); }
+        .about-content { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
+        .about-text h3 { font-size: 1.6rem; margin-bottom: 1rem; border-bottom: 2px solid var(--accent-light); padding-bottom: 0.5rem; }
+        .personal-info { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+        .personal-info div span { font-weight: 600; color: var(--text-primary); }
+
+        /* Timeline (Formation & Diplômes) */
+        .timeline { position: relative; padding-left: 2rem; border-left: 3px solid var(--accent); }
+        .timeline-item { margin-bottom: 2rem; position: relative; padding-left: 1.5rem; }
+        .timeline-item::before { content: ''; width: 15px; height: 15px; background-color: var(--accent); border: 3px solid var(--surface); border-radius: 50%; position: absolute; left: -2.8rem; top: 0; }
+        .timeline-date { font-weight: 600; color: var(--accent-light); margin-bottom: 0.3rem; font-size: 0.9rem; }
+        .timeline-content h4 { color: var(--text-primary); margin-bottom: 0.2rem; font-size: 1.1rem; }
+
+        /* === SECTION EXPERIENCE / PROJETS === */
+        .experience-item, .project-card { 
+            background-color: var(--surface); 
+            padding: 2rem; 
+            border-radius: 12px; 
+            border-left: 5px solid var(--accent); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .experience-item:hover, .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.15);
+        }
+        .experience-header h3 { font-size: 1.3rem; }
+        .experience-header span { color: var(--accent-light); font-weight: 500; display: block; margin-bottom: 1rem; }
+        .experience-item p { margin-top: 1rem; line-height: 1.6; }
+        .project-card h4 { color: var(--text-primary); font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .project-card p { margin-bottom: 1rem; }
+        .project-card .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+        .project-card .tags span { font-size: 0.8rem; background-color: var(--bg); padding: 0.3rem 0.7rem; border-radius: 5px; color: var(--accent-light); }
+        .projects-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+
+
+        /* === SECTION COMPETENCES (Skills) === */
+        #skills { background-color: var(--surface); }
+        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
+        .skill-category h3 { font-size: 1.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; }
+        .skill-item { margin-bottom: 1.5rem; }
+        .skill-info { display: flex; justify-content: space-between; margin-bottom: 0.4rem; font-weight: 500; }
+        .progress-bar { width: 100%; height: 10px; background-color: var(--bg); border-radius: 5px; overflow: hidden; }
+        .progress { 
+            height: 100%; 
+            background: linear-gradient(90deg, var(--accent-light), var(--accent-dark)); 
+            border-radius: 5px; 
+            transition: width 1s ease-out;
+            width: 0%;
+        }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+        .skill-tags span { background-color: var(--bg); padding: 0.5rem 1rem; border-radius: 50px; font-weight: 500; font-size: 0.9rem; color: var(--text-primary); }
+
+        /* === SECTION CONTACT (Raffinement) === */
+        .contact-container { 
+            display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; 
+            background-color: var(--surface); 
+            padding: 3.5rem; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .contact-info h3, .contact-form h3 { font-size: 1.6rem; color: var(--text-primary); margin-bottom: 1.5rem; }
+        .info-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.2rem; }
+        .info-item i { color: var(--accent); font-size: 1.3rem; margin-top: 0.2rem; }
+        .whatsapp-btn { display: inline-flex; align-items: center; gap: 0.5rem; background-color: #25D366; color: white; padding: 0.8rem 1.5rem; border-radius: 50px; text-decoration: none; margin-top: 1rem; transition: background-color 0.3s, transform 0.3s; }
+        .whatsapp-btn:hover { background-color: #1DAA52; transform: translateY(-2px); }
+
+        .contact-form {
+            background-color: var(--bg); 
+            padding: 2.5rem; 
+            border-radius: 12px;
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        
+        #contactForm input, #contactForm textarea { 
+            width: 100%; 
+            padding: 1rem; 
+            border-radius: 8px; 
+            border: 2px solid var(--surface); 
+            background-color: var(--surface); 
+            color: var(--text-primary); 
+            font-family: var(--font-main);
+            transition: border-color 0.3s; 
+        }
+        #contactForm input:focus, #contactForm textarea:focus { 
+            outline: none; 
+            border-color: var(--accent); 
+        }
+        
+        .btn-submit { 
+            width: 100%; 
+            border: none; 
+            padding: 1.2rem; 
+            border-radius: 8px; 
+            background: linear-gradient(90deg, var(--accent-light), var(--accent-dark)); 
+            color: white; 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: transform 0.3s, box-shadow 0.3s; 
+            text-transform: uppercase;
+        }
+        .btn-submit:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4); 
+        }
+
+        /* === SECTION CENTRES D'INTÉRÊT (Raffinement) === */
+        #interests { padding-top: 3rem; }
+        .interests .grid-container {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 2rem;
+        }
+        .interests .grid-item {
+            background-color: var(--surface);
+            padding: 2rem 1rem; 
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--bg);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+        }
+        .interests .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.15);
+            background-color: var(--bg);
+        }
+        .interests .grid-item i {
+            font-size: 2rem;
+            color: var(--accent);
+            display: inline-flex;
+            width: 50px;
+            height: 50px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: rgba(0, 123, 255, 0.1); 
+            margin-bottom: 1rem;
+        }
+        .interests .grid-item span {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            display: block;
+        }
+
+        /* === PIED DE PAGE (Footer - Raffiné) === */
+        footer { 
+            background-color: var(--surface); 
+            color: var(--text-secondary); 
+            padding: 4rem 2rem 2rem; 
+            margin-top: 4rem; 
+            border-top: 1px solid var(--bg); 
+        }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+        .footer-column h4 { color: var(--text-primary); font-size: 1.2rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--accent-light); padding-bottom: 0.5rem; }
+        
+        .footer-column a {
+            color: var(--text-secondary); 
+            text-decoration: none; 
+            margin-bottom: 0.5rem; 
+            display: block; 
+            transition: color 0.3s ease;
+            line-height: 1.8;
+        }
+        .footer-column a:hover { color: var(--accent); }
+        
+        .footer-social-links { display: flex; gap: 1rem; margin-top: 1rem; }
+        .footer-social-links a {
+            display: inline-flex;
+            width: 35px;
+            height: 35px;
+            background-color: var(--bg);
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .footer-social-links a i {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+        .footer-social-links a:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+        .footer-social-links a:hover i {
+            color: white;
+        }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid var(--bg); margin-top: 2rem; }
+        
+        .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 40px; height: 40px; background-color: var(--accent); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; opacity: 0; transition: opacity 0.3s, transform 0.3s; }
+        .back-to-top.visible { opacity: 1; transform: translateY(0); }
+        .back-to-top:hover { transform: translateY(-5px); }
+
+        /* === MEDIA QUERIES (Responsivité) === */
+        @media (max-width: 992px) {
+            html { font-size: 14px; }
+            section { padding: 4rem 0; }
+            
+            /* Header sur mobile */
+            .btn-portfolio { display: none; } /* Cache le bouton principal CV */
+            #quick-actions-toggle { display: block; } /* Affiche le bouton d'actions rapides (engrenage) */
+            
+            nav ul { display: none; } 
+            .menu-toggle { display: block; }
+            .nav-actions { gap: 0.5rem; }
+            
+            nav {
+                position: absolute; top: var(--header-height); left: 0; width: 100%;
+                background-color: var(--surface); box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                transition: transform 0.4s ease-out; transform: translateY(-200%);
+            }
+            nav.open { transform: translateY(0); display: block; }
+            nav ul { display: flex; flex-direction: column; padding: 1rem 0; }
+            nav ul li { text-align: center; margin: 0.5rem 0; }
+            nav a { padding: 0.5rem; border-bottom: none !important; }
+
+            .hero { min-height: auto; padding-top: 7rem; }
+            .hero .container { flex-direction: column-reverse; text-align: center; gap: 2rem; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content h2 { font-size: 1.5rem; }
+            .hero-buttons { justify-content: center; flex-wrap: wrap; }
+            .hero-image { flex-basis: 100%; }
+            .hero-image img { max-width: 300px; height: 350px; }
+            
+            #about .about-content { grid-template-columns: 1fr; gap: 3rem; }
+            .personal-info { grid-template-columns: 1fr; }
+            
+            .skills-container { gap: 2rem; }
+
+            .contact-container { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+            .contact-form { padding: 1.5rem; }
+            
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">Ousmane<span>Koné</span></div>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#home">Accueil</a></li>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#experience">Expérience</a></li>
+                    <li><a href="#projects">Projets</a></li>
+                    <li><a href="#skills">Compétences</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <!-- Bouton Télécharger CV sur Desktop -->
+                <a class='btn-portfolio' href='OUSMANE CV.pdf' download>Télécharger CV</a>
+                
+                <!-- Bouton Thème Switcher (Toujours visible) -->
+                <button id="theme-switcher" title="Changer le thème">
+                    <i class="fas fa-sun"></i>
+                </button>
+                
+                <!-- Bouton Actions Rapides (Mobile Seulement) -->
+                <button id="quick-actions-toggle" title="Actions rapides">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <div id="quick-actions-menu" style="display: none;">
+                    <a href="OUSMANE CV.pdf" download><i class="fas fa-file-download"></i> Télécharger CV</a>
+                </div>
+                
+                <!-- Menu Hamburger -->
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECTION 1: ACCUEIL (HOME) -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Bonjour, je suis <span>Ousmane Koné</span></h1>
+                    <h2>Étudiant en Réseau Informatique & Télécommunication</h2>
+                    <p>
+                        Apprenant passionné par l'infrastructure IT, la cybersécurité et l'administration des systèmes. Mon objectif est d'intégrer la <strong>SupInfo</strong> pour consolider mes bases et me préparer à une carrière rigoureuse dans la gestion des réseaux critiques.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn-primary btn-base">Me contacter</a>
+                        <a href="#skills" class="btn-secondary btn-base">Mes Compétences</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="profil.jpg" alt="Photo de Ousmane Koné, étudiant en Réseau Informatique">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: À PROPOS (ABOUT) -->
+        <section id="about" class="about" style="background-color: var(--surface);">
+            <div class="container">
+                <h2 class="section-title">À <span>propos</span> de moi</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Objectif Professionnel</h3>
+                        <p>
+                            Intégrer la SupInfo est mon ambition principale. Je souhaite y poursuivre un cursus spécialisé afin de devenir un expert polyvalent en <strong>Cybersécurité, Systèmes & Réseaux</strong>. Je suis naturellement curieux et très adaptable, des qualités essentielles pour maîtriser l'administration des infrastructures informatiques et relever les défis de sécurité.
+                        </p>
+                        <p style="margin-top: 1rem;">
+                            Mes expériences passées, bien que variées, ont forgé mon sens de l'<strong>organisation</strong>, ma <strong>rigueur méthodologique</strong> et mon excellente <strong>communication</strong>. Je suis prêt à mettre ces atouts au service d'une entreprise innovante.
+                        </p>
+                        
+                        <!-- Informations Personnelles basées sur le CV -->
+                        <div class="personal-info">
+                            <div><span>Nom :</span><p>Ousmane Koné</p></div>
+                            <div><span>Téléphone :</span><p>+225 0171 732202</p></div>
+                            <div><span>Email :</span><p>benousmane.kone92@gmail.com</p></div>
+                            <div><span>Localisation :</span><p>Côte d'Ivoire</p></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Formations -->
+                    <div class="education">
+                        <h3>Formation & Diplômes</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">2024 - 2026 (En cours)</div>
+                                <div class="timeline-content">
+                                    <h4>Licence 1 & 2 - Réseau Informatique</h4>
+                                    <p>Gecos-Formation, Abidjan</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">2023 - 2024</div>
+                                <div class="timeline-content">
+                                    <h4>Baccalauréat Scientifique</h4>
+                                    <p>Collèges-Rodin</p>
+                                </div>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-date">2019 - 2019</div>
+                                <div class="timeline-content">
+                                    <h4>BEPC</h4>
+                                    <p>Institut LKM</p>
+                                </div>
+                            </div>
+
+                              <div class="timeline-item">
+                                <div class="timeline-date">2014 - 2015</div>
+                                <div class="timeline-content">
+                                    <h4>CEPE</h4>
+                                    <p>Institut LKM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: EXPÉRIENCE PROFESSIONNELLE -->
+        <section id="experience" class="experience">
+            <div class="container">
+                <h2 class="section-title">Mon <span>Expérience</span></h2>
+                <div class="projects-container">
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <h3>Agent de Taxiphone</h3>
+                            <span>Juillet à Août 2023 | Gestion et Service Client</span>
+                        </div>
+                        <p>
+                            Gestion complète des opérations. Cette expérience a développé mes compétences en <strong>organisation</strong>, <strong>gestion de caisse</strong> et <strong>communication professionnelle</strong>, des atouts précieux pour l'administration IT.
+                        </p>
+                    </div>
+                    <div class="experience-item">
+    <div class="experience-header">
+        <h3>Professeur Particulier (Maths &amp; Sciences)</h3>
+        <span>Régulier | Suivi personnalisé</span>
+    </div>
+    <p>
+        J’ai accompagné des élèves de la Seconde à la Terminale en renforçant ma <strong>pédagogie</strong>, ma <strong>méthode</strong> et ma capacité à adapter l’apprentissage. Un suivi régulier m’a permis de soutenir leur <strong>motivation</strong> et leur progression depuis 2022.
+    </p>
+</div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <h3>Agent de Salubrité</h3>
+                            <span>Septembre 2022 | Rigueur et Environnement Sain</span>
+                        </div>
+                        <p>
+                            Mission de propreté sur un événement majeur. J'ai démontré ma <strong>rigueur</strong>, mon <strong>engagement</strong> et ma capacité à maintenir un environnement structuré et fonctionnel sous pression.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 4: PROJETS -->
+        <section id="projects" class="projects" style="background-color: var(--surface);">
+            <div class="container">
+                <h2 class="section-title">Mes <span>Projets</span> Personnels</h2>
+                <div class="projects-container">
+                    <div class="project-card">
+                        <h4>Mise en place d'un Réseau d'Entreprise Simplifié</h4>
+                        <p>Conception et simulation (via Cisco Packet Tracer) d'un réseau local pour une PME (LAN), incluant la segmentation (VLAN) et la configuration des switchs/routeurs de base.</p>
+                        <div class="tags"><span>Réseau Local</span> <span>Packet Tracer</span> <span>VLAN</span></div>
+                    </div>
+                    <div class="project-card">
+                        <h4>Gestion de Magasin via Feuille Excel</h4>
+                        <p>Création d'un outil de suivi financier sur Excel pour automatiser le calcul des bénéfices, pertes et stocks. Démonstration de ma rigueur analytique et de mes compétences en Exploitation (MS Office).</p>
+                        <div class="tags"><span>Exploitation</span> <span>Excel</span> <span>Analyse de Données</span></div>
+                    </div>
+                    <div class="project-card">
+                        <h4>Initiation à la Virtualisation (VM)</h4>
+                        <p>Installation et configuration de machines virtuelles (VirtualBox) pour tester différents systèmes d'exploitation (Linux, Windows Server) et comprendre les architectures de serveurs.</p>
+                        <div class="tags"><span>Virtualisation</span> <span>Systèmes</span> <span>Linux</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: COMPÉTENCES -->
+        <section id="skills" class="skills">
+            <div class="container">
+                <h2 class="section-title">Mes <span>compétences</span></h2>
+                <div class="skills-container">
+                    
+                    <!-- Catégorie 1: Réseau & Systèmes (Core IT) - Débutant/Apprenant -->
+                    <div class="skill-category">
+                        <h3>Réseaux & Systèmes</h3>
+                        <div class="skill-item">
+                            <div class="skill-info"><span>Administration Systèmes (Windows/Linux)</span><span>40%</span></div>
+                            <div class="progress-bar"><div class="progress" data-progress="40"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span>Protocoles Réseau (TCP/IP, DNS)</span><span>50%</span></div>
+                            <div class="progress-bar"><div class="progress" data-progress="50"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span>Virtualisation (VirtualBox)</span><span>35%</span></div>
+                            <div class="progress-bar"><div class="progress" data-progress="35"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span>Exploitation & Maintenance IT (Basique)</span><span>45%</span></div>
+                            <div class="progress-bar"><div class="progress" data-progress="45"></div></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Catégorie 2: Méthodes & Outils (CV Pro) - Ajusté -->
+                    <div class="skill-category">
+                        <h3>Méthodologie & Outils</h3>
+                        <div class="skill-item">
+                            <div class="skill-info"><span>Bases de Données (SQL)</span><span>30%</span></div>
+                            <div class="progress-bar"><div class="progress" data-progress="30"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span>Programmation (Bases: HTML/CSS)</span><span>40%</span></div>
+                            <div class="progress-bar"><div class="progress" data-progress="40"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span>Microsoft Office (Word, Excel, PowerPoint)</span><span>75%</span></div>
+                            <div class="progress-bar"><div class="progress" data-progress="75"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span>Conception (Architecture Simple)</span><span>40%</span></div>
+                            <div class="progress-bar"><div class="progress" data-progress="40"></div></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Catégorie 3: Compétences Transversales (Soft Skills) -->
+                    <div class="skill-category">
+                        <h3>Compétences Transversales</h3>
+                        <div class="skill-tags">
+                            <span><i class="fas fa-handshake"></i> Travail d'équipe</span> 
+                            <span><i class="fas fa-brain"></i> Esprit d'analyse</span> 
+                            <span><i class="fas fa-sync-alt"></i> Adaptabilité</span> 
+                            <span><i class="fas fa-comment-dots"></i> Communication</span> 
+                            <span><i class="fas fa-cogs"></i> Rigueur</span>
+                            <span><i class="fas fa-shield-alt"></i> Sens des responsabilités</span>
+                        </div>
+                        
+                        <!-- Langues -->
+                        <h3 style="margin-top: 2rem;">Langues</h3>
+                        <div class="skill-tags">
+                            <span><i class="fas fa-flag"></i> Français (Courant)</span> 
+                            <span><i class="fas fa-globe"></i> Anglais (Intermédiaire)</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: CONTACT (Raffinée) -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Me <span>contacter</span></h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Informations de Contact</h3>
+                        <p>Je suis activement à la recherche d'opportunités de stages, d'alternances ou de collaborations dans le domaine de l'administration IT, Réseau et Cybersécurité.</p>
+                        <div class="info-item"><i class="fas fa-envelope"></i><div><h4>Email Professionnel</h4><p>benousmane.kone92@gmail.com</p></div></div>
+                        <div class="info-item"><i class="fas fa-phone"></i><div><h4>Téléphone / WhatsApp</h4><p>(+225) 0171 732202</p></div></div>
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i><div><h4>Adresse</h4><p>Abidjan, Côte d'Ivoire</p></div></div>
+                        <a href="https://wa.me/2250171732202" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Contacter par WhatsApp</a>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h3>Envoyez-moi un message direct</h3>
+                        <form id="contactForm">
+                            <div class="form-group"><input type="text" id="name" placeholder="Votre nom" required></div>
+                            <div class="form-group"><input type="email" id="email" placeholder="Votre email" required></div>
+                            <div class="form-group"><input type="text" id="subject" placeholder="Sujet de la demande (Stage, Collaboration...)" required></div>
+                            <div class="form-group"><textarea id="message" rows="6" placeholder="Votre message détaillé" required></textarea></div>
+                            
+                            <button type="button" class="btn-submit" onclick="envoyerMessageWhatsApp('2250171732202')">
+                                <i class="fas fa-paper-plane"></i> ENVOYER LE MESSAGE
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 7: CENTRES D'INTÉRÊT (Raffinée) -->
+        <section id="interests" class="interests" style="background-color: var(--surface);">
+            <div class="container">
+                <h2 class="section-title">Centres <span>d'Intérêt</span></h2>
+                <div class="grid-container">
+                    <div class="grid-item"><i class="fas fa-laptop-code"></i><span>Veille Technologique</span></div>
+                    <div class="grid-item"><i class="fas fa-running"></i><span>Sport & Bien-être</span></div>
+                    <div class="grid-item"><i class="fas fa-server"></i><span>Administration Système</span></div>
+                    <div class="grid-item"><i class="fas fa-shield-alt"></i><span>Cybersécurité (Initiation)</span></div>
+                    <div class="grid-item"><i class="fas fa-book-open"></i><span>Apprentissage Continu</span></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PIED DE PAGE (Footer - Raffiné) -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Ousmane Koné</h4>
+                    <p>Futur Administrateur Systèmes & Réseaux, engagé à construire des infrastructures numériques sécurisées et performantes.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Liens Rapides</h4>
+                    <a href="#home">Accueil</a>
+                    <a href="#about">À propos</a>
+                    <a href="#contact">Contact</a>
+                    <a download="OUSMANE CV.pdf" href="OUSMANE CV.pdf">Télécharger CV</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact & Réseaux</h4>
+                    <p>Email: benousmane.kone92@gmail.com</p>
+                    <p>Téléphone: (+225) 0171 732202</p>
+                    <div class="footer-social-links">
+                        <a href="https://wa.me/2250171732202" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <!-- LIENS SOCIAUX À COMPLÉTER PAR VOUS -->
+                        <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Ousmane Koné | Portfolio Pro | Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#home" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeSwitcher = document.getElementById('theme-switcher');
+            const backToTopBtn = document.querySelector('.back-to-top');
+            const header = document.querySelector('header');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navUl = document.querySelector('nav'); 
+            const skillBars = document.querySelectorAll('#skills .progress');
+            const sections = document.querySelectorAll('section');
+            const quickActionsToggle = document.getElementById('quick-actions-toggle');
+            const quickActionsMenu = document.getElementById('quick-actions-menu');
+
+            const sunIcon = '<i class="fas fa-sun"></i>';
+            const moonIcon = '<i class="fas fa-moon"></i>';
+            
+            // --- GESTION DU THÈME ---
+            const setTheme = (isLight) => {
+                document.body.classList.toggle('light-mode', isLight);
+                themeSwitcher.innerHTML = isLight ? moonIcon : sunIcon;
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            };
+
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme) {
+                setTheme(savedTheme === 'light');
+            } else {
+                setTheme(!prefersDark);
+            }
+
+            themeSwitcher.addEventListener('click', () => {
+                setTheme(!document.body.classList.contains('light-mode'));
+            });
+            
+            // --- GESTION DE LA NAVIGATION MOBILE (HAMBURGER) ---
+            menuToggle.addEventListener('click', () => {
+                navUl.classList.toggle('open');
+                menuToggle.querySelector('i').classList.toggle('fa-bars');
+                menuToggle.querySelector('i').classList.toggle('fa-times');
+                quickActionsMenu.style.display = 'none'; // Ferme les quick actions si le menu nav s'ouvre
+            });
+
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (navUl.classList.contains('open') && window.innerWidth <= 992) {
+                        navUl.classList.remove('open');
+                        menuToggle.querySelector('i').classList.add('fa-bars');
+                        menuToggle.querySelector('i').classList.remove('fa-times');
+                    }
+                });
+            });
+
+            // --- GESTION DU MENU D'ACTIONS RAPIDES (ENGRENAGE) ---
+            quickActionsToggle.addEventListener('click', (e) => {
+                quickActionsMenu.style.display = quickActionsMenu.style.display === 'flex' ? 'none' : 'flex';
+                navUl.classList.remove('open'); // Ferme le menu nav si les quick actions s'ouvrent
+                menuToggle.querySelector('i').classList.add('fa-bars');
+                menuToggle.querySelector('i').classList.classList.remove('fa-times');
+            });
+            // Fermer le menu si on clique en dehors
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth <= 992 && !quickActionsToggle.contains(e.target) && !quickActionsMenu.contains(e.target)) {
+                    quickActionsMenu.style.display = 'none';
+                }
+            });
+
+
+            // --- GESTION DU SCROLL (Header/Back-to-Top/Animations/Navigation Active) ---
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.2
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    const id = entry.target.getAttribute('id');
+                    
+                    if (id === 'skills' && entry.isIntersecting) {
+                        skillBars.forEach(bar => {
+                            const progressValue = bar.getAttribute('data-progress');
+                            bar.style.width = progressValue + '%';
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                    
+                    // Gestion du lien actif (Scrollspy)
+                    const middleOfViewport = window.scrollY + window.innerHeight / 2;
+                    sections.forEach(sec => {
+                        const rect = sec.getBoundingClientRect();
+                        const top = rect.top + window.scrollY;
+                        const bottom = rect.bottom + window.scrollY;
+                        const link = document.querySelector(`nav a[href="#${sec.id}"]`);
+
+                        if (link) {
+                            if (middleOfViewport >= top && middleOfViewport < bottom) {
+                                link.classList.add('active');
+                            } else {
+                                link.classList.remove('active');
+                            }
+                        }
+                    });
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    header.classList.remove('scrolled');
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+        });
+
+        // --- FONCTION D'ENVOI WHATSAPP ---
+        function envoyerMessageWhatsApp(telephone) {
+            const nom = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const sujet = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (!nom || !email || !sujet || !message) {
+                alert("Veuillez remplir tous les champs du formulaire pour m'envoyer un message.");
+                return;
+            }
+
+            const numero = telephone.replace(/\s/g, ''); 
+
+            const texteWhatsApp = `Bonjour Ousmane, je vous contacte via votre portfolio professionnel.\n\n*Nom :* ${nom}\n*Email :* ${email}\n*Sujet :* ${sujet}\n\n*Message :*\n${message}`;
+
+            const texteEncode = encodeURIComponent(texteWhatsApp);
+
+            const lienWhatsApp = `https://wa.me/${numero}?text=${texteEncode}`;
+
+            window.open(lienWhatsApp, '_blank');
+        }
+    </script>
+</body>
+</html>
